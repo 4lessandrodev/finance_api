@@ -1,0 +1,41 @@
+version: "3"
+services: 
+  api: 
+    container_name: api_finance
+    build: .
+    image: api_finance
+    restart: always
+    depends_on:
+      - mongo_db
+    volumes:
+      - ./dist:/usr/api_finance/dist
+      - ./package.json:/usr/api_finance/package.json
+    ports:
+      - "3000:3000"
+    environment:
+        PORT: 3000
+        MONGO_HOST: "mongodb://root:root@mongo_db:27017/financeDB"
+    networks:
+      - connect
+    links:
+      - mongo_db
+    command: npm run start:prod
+    
+  mongo_db:
+    container_name: mongo_db
+    image: mongo
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      MONGO_DB: financeDB
+    networks:
+      - connect
+    volumes:
+      - ./data:/data/db
+    ports: 
+      - "27017:27017"
+
+networks:
+  connect:
+    driver: bridge

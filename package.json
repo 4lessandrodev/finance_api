@@ -1,0 +1,26 @@
+{
+  "name": "finance_api",
+  "version": "1.0.0",
+  "description": "Uma api financeira - Desafio Pratico IGTI - Fullstack",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ALESSANDROLMENEZES/finance_api.git"
+  },
+  "keywords": [
+    "Api",
+    "Clean-Architecture",
+    "Clean-Code",
+    "NestJS",
+    "Tdd"
+  ],
+  "author": "Alessandro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ALESSANDROLMENEZES/finance_api/issues"
+  },
+  "homepage": "https://github.com/ALESSANDROLMENEZES/finance_api#readme"
+}
