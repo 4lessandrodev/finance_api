@@ -1,4 +1,4 @@
-import { CreateAccountDto } from "src/dto/create-account.dto";
+import { CreateAccountDto } from "../../dto/create-account.dto";
 
 export class Account{
  private readonly id: string;

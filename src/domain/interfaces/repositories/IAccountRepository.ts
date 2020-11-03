@@ -1,5 +1,5 @@
-import { CreateAccountDto } from "src/dto/create-account.dto";
-import { Account } from "src/infra/orms/mongo/repositories/schemas/account.schema";
+import { CreateAccountDto } from "../../../dto/create-account.dto";
+import { Account } from "../../../infra/orms/mongo/repositories/schemas/account.schema";
 
 export interface IAccountRepository {
  createAccount(account:CreateAccountDto): Promise<Account>;

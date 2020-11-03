@@ -1,4 +1,4 @@
-import { IAccountRepository } from "src/domain/interfaces/repositories/IAccountRepository";
+import { IAccountRepository } from "../../../../../../domain/interfaces/repositories/IAccountRepository";
 import { Account } from "../../schemas/account.schema";
 
 
