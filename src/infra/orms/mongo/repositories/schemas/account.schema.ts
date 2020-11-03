@@ -4,8 +4,11 @@ import { Document } from 'mongoose';
 export type AccountDocument = Account & Document;
 
 @Schema()
-export class Account{
+export class Account extends Document{
  
+ @Prop()
+ id: string;
+
  @Prop({required:true})
  agencia: number;
  

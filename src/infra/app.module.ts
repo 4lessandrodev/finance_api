@@ -1,10 +1,7 @@
 import { Module } from '@nestjs/common';
-import { AccountController } from '../presentation/account/account.controller';
-import { CreateAccountService } from '../application/use_cases/account/create-account/create-account.service';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [],
-  controllers: [AccountController],
-  providers: [CreateAccountService],
+  imports: [MongooseModule.forRoot('mongodb://root:root@mongo_db:27017/financeDB')]
 })
 export class AppModule {}
