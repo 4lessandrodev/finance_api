@@ -33,6 +33,12 @@ describe('create account', () => {
   const repositorySut = makeSut();
   const fakeAcc = fakeAccount();
   const result = await CreateAccountUseCase.execute(fakeAcc, repositorySut);
-  expect(result).toBe(fakeAcc);
+  expect(result.account).toBe(fakeAcc.account);
+  expect(result.agency).toBe(fakeAcc.agency);
+  expect(result.balance).toBe(fakeAcc.balance);
+  expect(result.name).toBe(fakeAcc.name);
+  expect(CreateAccountUseCase.execute).not.toThrow();
+  expect(result.id).not.toBe(null);
+  expect(result).not.toBe(undefined);
  });
 });
