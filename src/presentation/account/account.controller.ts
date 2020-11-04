@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Post, ValidationPipe } from '@nestjs/common';
-import { CreateAccountDto } from 'src/dto/create-account.dto';
+import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
+import { CreateAccountDto } from 'src/dto/account/create-account.dto';
 import { AccountService } from 'src/infra/orms/mongo/repositories/repository/account/account.service';
 
 @Controller('account')

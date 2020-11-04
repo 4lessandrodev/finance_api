@@ -1,16 +1,20 @@
-import { IsNotEmpty, IsNumber } from "class-validator";
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreateAccountDto{
  id: string | null;
 
  @IsNotEmpty()
  @IsNumber()
- agencia: number;
+ agency: number;
  
  @IsNotEmpty()
  @IsNumber()
- conta: number;
+ account: number;
 
  @IsNotEmpty()
  name: string;
+
+ @IsNotEmpty()
+ @IsNumber()
+ balance:number
 }

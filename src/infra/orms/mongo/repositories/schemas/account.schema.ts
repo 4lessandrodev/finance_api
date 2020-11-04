@@ -10,10 +10,10 @@ export class Account extends Document{
  id: string;
 
  @Prop({required:true})
- agencia: number;
+ agency: number;
  
  @Prop({required:true})
- conta: number;
+ account: number;
  
  @Prop({required:true})
  name: string;

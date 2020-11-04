@@ -1,7 +1,8 @@
 
 export class IAccount{
- id: string | null;
- agencia: number;
- conta: number;
+ id: string;
+ agency: number;
+ account: number;
  name: string;
+ balance: number;
 }
