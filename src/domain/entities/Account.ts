@@ -1,8 +1,9 @@
 import { CreateAccountDto } from '../../dto/account/create-account.dto';
 import { AggregateRoot } from '../aggregate-root/AggregateRoot';
 import {validate} from 'uuid';
+import { IAccount } from '../interfaces/entities/IAccount';
 
-export class Account extends AggregateRoot{
+export class Account extends AggregateRoot implements IAccount{
  readonly id: string;
  readonly agency: number;
  readonly account: number;
@@ -11,11 +12,11 @@ export class Account extends AggregateRoot{
 
  constructor(account: CreateAccountDto) {
   super();
-  this.id = this.validateId(account.id);
-  this.agency = account.agency;
-  this.account = account.account;
-  this.name = account.name;
-  this.balance = account.balance;
+  this.id = this.validateId(account?.id);
+  this.agency = account?.agency;
+  this.account = account?.account;
+  this.name = account?.name;
+  this.balance = account?.balance;
   this.validateAccount();
  }
 
