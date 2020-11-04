@@ -21,17 +21,11 @@ export class Account extends AggregateRoot implements IAccount{
  }
 
  isValidAccount(): boolean {
-  return (this.account > 0) &&
-   (this.agency > 0) &&
-   (this.balance >= 0) &&
-   (this.name.length >= 3) &&
-   (validate(this.id));
+  return (this.account > 0)&&(this.agency > 0)&&(this.balance >= 0)&&(this.name.length >= 3)&&(validate(this.id));
  }
 
  validateAccount(): Error | void {
   const isValidAccount = this.isValidAccount();
-  if (!isValidAccount) {
-   throw new Error('Invalid account params');
-  }
+  if (!isValidAccount) { throw new Error('Invalid account params');}
  }
 }
