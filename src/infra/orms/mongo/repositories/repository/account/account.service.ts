@@ -16,6 +16,6 @@ export class AccountService {
  ) { }
  
  async createNewAccount(createAccountDto:CreateAccountDto):Promise<IAccount> {
-  return await CreateAccountUseCase.execute(createAccountDto, this.accountRepository);
+  return await new CreateAccountUseCase(this.accountRepository).execute(createAccountDto);
  }
 }

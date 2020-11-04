@@ -32,13 +32,14 @@ describe('create account', () => {
  it('should use repo and return result', async () => {
   const repositorySut = makeSut();
   const fakeAcc = fakeAccount();
-  const result = await CreateAccountUseCase.execute(fakeAcc, repositorySut);
-  expect(result.account).toBe(fakeAcc.account);
-  expect(result.agency).toBe(fakeAcc.agency);
-  expect(result.balance).toBe(fakeAcc.balance);
-  expect(result.name).toBe(fakeAcc.name);
-  expect(CreateAccountUseCase.execute).not.toThrow();
-  expect(result.id).not.toBe(null);
+  const createOne = async ():Promise<IAccount> => await new CreateAccountUseCase(repositorySut).execute(fakeAcc);
+  const result = createOne();
+  expect(createOne).not.toThrow();
+  expect((await result).account).toBe(fakeAcc.account);
+  expect((await result).agency).toBe(fakeAcc.agency);
+  expect((await result).balance).toBe(fakeAcc.balance);
+  expect((await result).name).toBe(fakeAcc.name);
+  expect((await result).id).not.toBe(null);
   expect(result).not.toBe(undefined);
  });
 });
