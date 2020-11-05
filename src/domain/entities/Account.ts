@@ -28,4 +28,5 @@ export class Account extends AggregateRoot implements IAccount{
   const isValidAccount = this.isValidAccount();
   if (!isValidAccount) { throw new Error('Invalid account params');}
  }
+
 }
