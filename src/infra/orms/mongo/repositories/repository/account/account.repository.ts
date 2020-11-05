@@ -6,10 +6,11 @@ import { UpdateAccountDto } from '../../../../../../dto/account/update-account.d
 import { IAccountRepository } from '../../../../../../domain/interfaces/repositories/IAccountRepository';
 import { Account } from '../../schemas/account.schema';
 import { IDepositCash } from 'src/domain/interfaces/entities/IDepositCash';
+import { IAccount } from 'src/domain/interfaces/entities/IAccount';
 
 
 export class AccountRespository extends Account implements IAccountRepository{
- depositCashOnAccount = async (account: CreateAccountDto, depositValue: number): Promise<IDepositCash> => {
+ depositCashOnAccount = async (account: IDepositCash, depositValue: number): Promise<IAccount> => {
   throw new Error('Method not implemented.' + account + depositValue);
  }
 
