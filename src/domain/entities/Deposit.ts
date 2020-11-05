@@ -13,7 +13,7 @@ export class Deposit implements IDepositCash{
  }
 
  isValidDeposit(): boolean {
-  return (this.account > 0)&&(this.agency > 0)&&(this.depositValue >= 0);
+  return (this.account > 0)&&(this.agency > 0)&&(this.depositValue > 0);
  }
 
  validateDeposit(): Error | void {
