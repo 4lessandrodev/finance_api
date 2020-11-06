@@ -4,7 +4,7 @@ import { FindAccountDto } from '../../../dto/account/find-account.dto';
 import { UpdateAccountDto } from '../../../dto/account/update-account.dto';
 import { CreateAccountDto } from '../../../dto/account/create-account.dto';
 import { IAccount } from '../entities/IAccount';
-import { DepositCashAccountDto } from 'src/dto/account/deposit-cash-account.dto';
+import { DepositCashAccountDto } from '../../../dto/account/deposit-cash-account.dto';
 
 export interface IAccountRepository {
  createAccount(account:CreateAccountDto): Promise<IAccount>;

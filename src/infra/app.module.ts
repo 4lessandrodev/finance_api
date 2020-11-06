@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
+import { DatabaseModule } from './config/database/database.module';
+import {AccountsModule  } from './orms/mongo/repositories/repositories/account/accounts.module';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://root:root@mongo_db:27017/financeDB')]
+  imports: [
+    DatabaseModule,
+    AccountsModule
+  ]
 })
 export class AppModule {}

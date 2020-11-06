@@ -1,4 +1,4 @@
-import { IAccount } from 'src/domain/interfaces/entities/IAccount';
+import { IAccount } from '../../../domain/interfaces/entities/IAccount';
 import { DepositCashAccountDto } from 'src/dto/account/deposit-cash-account.dto';
 import { Deposit } from '../../../domain/entities/Deposit';
 import { IAccountRepository } from '../../../domain/interfaces/repositories/IAccountRepository';

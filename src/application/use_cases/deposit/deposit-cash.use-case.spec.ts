@@ -1,5 +1,5 @@
-import { IDepositCash } from 'src/domain/interfaces/entities/IDepositCash';
-import { DepositCashAccountDto } from 'src/dto/account/deposit-cash-account.dto';
+import { IDepositCash } from '../../../domain/interfaces/entities/IDepositCash';
+import { DepositCashAccountDto } from '../../../dto/account/deposit-cash-account.dto';
 import { IAccount } from '../../../domain/interfaces/entities/IAccount';
 import { CreateAccountDto } from '../../../dto/account/create-account.dto';
 import { DeleteAccountDto } from '../../../dto/account/delete-account.dto';
