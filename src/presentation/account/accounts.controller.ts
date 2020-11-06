@@ -1,6 +1,6 @@
 import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
 import { CreateAccountDto } from '../../dto/account/create-account.dto';
-import { AccountService } from '../../infra/orms/mongo/repositories/repositories/account/accounts.service';
+import { AccountService } from '../../infra/orms/mongo/repositories/account/accounts.service';
 
 @Controller('accounts')
 export class AccountController {

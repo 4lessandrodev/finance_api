@@ -1,6 +1,6 @@
 
 import { Connection } from 'mongoose';
-import { AccountSchema } from '../../schemas/account.schema';
+import { AccountSchema } from '../schemas/account.schema';
 
 export const accountProviders = [
   {

@@ -1,3 +1,4 @@
+import { DepositCashAccountDto } from 'src/dto/account/deposit-cash-account.dto';
 import { IAccount } from '../../../domain/interfaces/entities/IAccount';
 import { CreateAccountDto } from '../../../dto/account/create-account.dto';
 import { DeleteAccountDto } from '../../../dto/account/delete-account.dto';
@@ -25,7 +26,11 @@ describe('create account', () => {
    updateAccount: async (account: UpdateAccountDto): Promise<IAccount> => account,
    deleteAccount: async (id:DeleteAccountDto): Promise<void> => {id;},
    findOneAccount: async (id: FindAccountDto): Promise<IAccount> => { console.log(id); return fakeAccount(); },
-   findManyAccount: async (search: filterAccountDto): Promise<IAccount[]> => { console.log(search); return accounts; }
+   findManyAccount: async (search: filterAccountDto): Promise<IAccount[]> => { console.log(search); return accounts; },
+   depositCashOnAccount: async (account: DepositCashAccountDto, depositValue: number): Promise<IAccount> => {
+    console.log(`${account} + ${depositValue}`);
+    return fakeAccount();
+   }
   };
  };
 
