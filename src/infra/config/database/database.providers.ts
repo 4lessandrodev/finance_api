@@ -1,12 +1,8 @@
-import * as mongoose from 'mongoose';
+import { Connection, createConnection } from 'typeorm';
 
-export const databaseProviders = [
- {
-   provide: 'DATABASE_CONNECTION',
-   useFactory: (): Promise<typeof mongoose> =>
-     mongoose.connect('mongodb+srv://admin:admin@cluster0.2nyar.mongodb.net/test?retryWrites=true&w=majority', {
-       useNewUrlParser: true,
-       useUnifiedTopology: true
-     }),
- },
-];
+export const connection: Connection = await createConnection({
+    type: 'mongodb',
+    host: 'cluster0.2nyar.mongodb.net',
+    port: 27017,
+    database: 'test'
+});
