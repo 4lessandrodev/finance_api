@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from './config/database/database.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { typeormConfig } from './config/database/typeorm.config';
 import {AccountsModule  } from './orms/mongo/repositories/account/accounts.module';
 
 @Module({
   imports: [
-    DatabaseModule,
+    TypeOrmModule.forRoot(typeormConfig),
     AccountsModule
   ]
 })
