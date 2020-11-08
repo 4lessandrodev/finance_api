@@ -1,23 +1,25 @@
 
-import { Model } from 'mongoose';
-import { Injectable, Inject } from '@nestjs/common';
-import { IAccount } from '../interfaces/IAccount';
+import { Injectable } from '@nestjs/common';
 import { CreateAccountDto } from 'src/dto/account/create-account.dto';
-// import { CreateAccountUseCase } from '../../../../../../application/use_cases/account/create-account.use-case';
+import { InjectRepository } from '@nestjs/typeorm';
+import { AccountRepository } from './account.repository';
+import { IAccount } from 'src/domain/interfaces/entities/IAccount';
+import { CreateAccountUseCase } from '../../../../../application/use_cases/account/create-account.use-case';
 
 
 @Injectable()
 export class AccountService {
   constructor(
-    @Inject('ACCOUNT_MODEL') private accountModel: Model<IAccount>
+    @InjectRepository(AccountRepository) private accountRepository: AccountRepository
     ) {}
     
-  async create(createAccount: CreateAccountDto): Promise<IAccount> {
-    const createdCat = new this.accountModel(createAccount);
-    return createdCat.save();
+    async create(createAccountDto: CreateAccountDto): Promise<IAccount> {
+      const createAccount = new CreateAccountUseCase().execute(createAccountDto, this.accountRepository);
+      return createAccount;
+    }
+    
+    // async findAll(): Promise<IAccount[]> {
+    //   return this.accountModel.find().exec();
+    // }
   }
-
-  async findAll(): Promise<IAccount[]> {
-    return this.accountModel.find().exec();
-  }
-}
+  

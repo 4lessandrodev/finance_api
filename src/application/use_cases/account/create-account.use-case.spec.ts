@@ -37,7 +37,7 @@ describe('create account', () => {
  it('should use repo and return result', async () => {
   const repositorySut = makeSut();
   const fakeAcc = fakeAccount();
-  const createOne = async ():Promise<IAccount> => await new CreateAccountUseCase(repositorySut).execute(fakeAcc);
+  const createOne = async ():Promise<IAccount> => await new CreateAccountUseCase().execute(fakeAcc, repositorySut);
   const result = createOne();
   expect(createOne).not.toThrow();
   expect((await result).account).toBe(fakeAcc.account);

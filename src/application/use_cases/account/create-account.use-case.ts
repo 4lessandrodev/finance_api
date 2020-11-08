@@ -5,11 +5,10 @@ import { CreateAccountDto } from '../../../dto/account/create-account.dto';
 import { IUseCase } from '../interfaces/IUseCase';
 
 export class CreateAccountUseCase implements IUseCase<CreateAccountDto, IAccount>{
- constructor(private repository: IAccountRepository) {}
- execute = async (accountDto:CreateAccountDto): Promise<IAccount> => {
+ execute = async (accountDto:CreateAccountDto, repository: IAccountRepository): Promise<IAccount> => {
   
    const account = new Account(accountDto);
-   return await this.repository.createAccount(account);
+   return await repository.createAccount(account);
   
  }
 }

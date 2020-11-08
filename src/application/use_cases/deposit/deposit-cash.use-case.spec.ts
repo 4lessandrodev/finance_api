@@ -51,7 +51,7 @@ describe('create account', () => {
  it('should create a instance of account to make a deposit', () => {
   const repository = makeSut();
     const depositDto = fakeDeposit();
-    const result = async ()=> await new DepositCashUseCase(repository).execute(depositDto);
+    const result = async ()=> await new DepositCashUseCase().execute(depositDto,repository);
     expect(result).not.toThrow();
  });
 

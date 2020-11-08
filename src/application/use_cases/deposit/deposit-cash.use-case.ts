@@ -5,11 +5,9 @@ import { IAccountRepository } from '../../../domain/interfaces/repositories/IAcc
 import { IUseCase } from '../interfaces/IUseCase';
 
 export class DepositCashUseCase implements IUseCase<DepositCashAccountDto, IAccount>{
- constructor(private repository: IAccountRepository) {}
- execute = async (depositDto:DepositCashAccountDto): Promise<IAccount> => {
-  
+ execute = async (depositDto:DepositCashAccountDto, repository: IAccountRepository): Promise<IAccount> => {  
   const deposit = new Deposit(depositDto);
-  return await this.repository.depositCashOnAccount(deposit, depositDto.depositValue);  
-
+  return await repository.depositCashOnAccount(deposit, depositDto.depositValue);  
+  
  }
 }
