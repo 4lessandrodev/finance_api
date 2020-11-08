@@ -1,7 +1,7 @@
-import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
 
 @Entity()
-export class AccountSchema{
+export class AccountSchema extends BaseEntity{
  @ObjectIdColumn({ type: 'uuid', nullable: false })
  id: ObjectID;
 
