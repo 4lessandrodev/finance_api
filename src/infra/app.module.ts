@@ -6,7 +6,7 @@ import { DepositsModule } from './orms/mongo/repositories/deposit/deposit.module
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(...typeormConfig),
+    TypeOrmModule.forRoot(typeormConfig),
     AccountsModule,
     DepositsModule
   ]
