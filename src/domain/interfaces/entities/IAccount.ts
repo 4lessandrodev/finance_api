@@ -1,5 +1,5 @@
 
-export class IAccount{
+export interface IAccount{
  id: string;
  agency: number;
  account: number;

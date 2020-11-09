@@ -1,7 +1,7 @@
 
-export class IDepositCash{
+export interface IDepositCash{
  id?: string;
- agency: number;
- account: number;
- depositValue: number;
+ toAgency: number;
+ toAccount: number;
+ value: number;
 }
