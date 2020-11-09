@@ -5,7 +5,7 @@ import {AccountsModule  } from './orms/mongo/repositories/account/accounts.modul
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(typeormConfig),
+    TypeOrmModule.forRoot(...typeormConfig),
     AccountsModule
   ]
 })

@@ -1,9 +1,9 @@
 
 import { Injectable } from '@nestjs/common';
-import { CreateAccountDto } from 'src/dto/account/create-account.dto';
+import { CreateAccountDto } from '../../../../../dto/account/create-account.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AccountRepository } from './account.repository';
-import { IAccount } from 'src/domain/interfaces/entities/IAccount';
+import { IAccount } from '../../../../../domain/interfaces/entities/IAccount';
 import { CreateAccountUseCase } from '../../../../../application/use_cases/account/create-account.use-case';
 
 

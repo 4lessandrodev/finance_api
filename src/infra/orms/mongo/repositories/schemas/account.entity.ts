@@ -14,6 +14,6 @@ export class AccountSchema extends BaseEntity{
  @Column({ nullable: false })
  name: string;
 
- @Column({ nullable: false })
+ @Column({ nullable: false, precision:2 })
  balance: number;
  };

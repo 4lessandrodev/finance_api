@@ -3,7 +3,7 @@ import { v4 as uuid} from 'uuid';
 
 export const customPkFactory = () => uuid();
 
-export const typeormConfig:TypeOrmModuleOptions = {
+export const typeormConfig:TypeOrmModuleOptions[] = [{
     type: 'mongodb',
     host: 'cluster0.2nyar.mongodb.net',
     port: 27017,
@@ -15,4 +15,4 @@ export const typeormConfig:TypeOrmModuleOptions = {
     pkFactory: customPkFactory(),
     entities: [`${__dirname}/../**/*.entity.ts`],
     synchronize:true
-};
+}];
