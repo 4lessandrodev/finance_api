@@ -4,24 +4,24 @@ import { IDepositCash } from '../interfaces/entities/IDepositCash';
 
 export class Deposit extends AggregateRoot implements IDepositCash{
  readonly id: string;
- readonly agency: number;
- readonly account: number;
- readonly depositValue: number;
+ readonly toAgency: number;
+ readonly toAccount: number;
+ readonly value: number;
 
  constructor(deposit: IDepositCash) {
   super();
   this.id = this.validateId(deposit?.id);
-  this.agency = deposit.agency;
-  this.account = deposit.account;
-  this.depositValue = deposit.depositValue;
+  this.toAgency = deposit.toAgency;
+  this.toAccount = deposit.toAccount;
+  this.value = deposit.value;
   this.validateDeposit();
  }
 
- isValidDeposit(): boolean {
-  return (this.account > 0)&&(this.agency > 0)&&(this.depositValue > 0)&&(validate(this.id));
+ private isValidDeposit(): boolean {
+  return (this.toAccount > 0)&&(this.toAgency > 0)&&(this.value > 0)&&(validate(this.id));
  }
 
- validateDeposit(): Error | void {
+ private validateDeposit(): Error | void {
   const isValidDeposit = this.isValidDeposit();
   if (!isValidDeposit) { throw new Error('Invalid deposit params');}
  }
