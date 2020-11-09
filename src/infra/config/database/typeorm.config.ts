@@ -4,25 +4,24 @@ import { v4 as uuid} from 'uuid';
 export const customPkFactory = () => uuid();
 
 export const typeormConfig:TypeOrmModuleOptions = {
-    type: 'mongodb',
-    host: 'cluster0.2nyar.mongodb.net',
-    port: 27017,
-    password: 'admin',
-    username: 'admin',
-    database: 'test',
+    type:'mongodb',
+    host: process.env.TYPEORM_HOST,
+    port: parseInt(process.env.TYPEORM_PORT),
+    password: process.env.TYPEORM_PASSWORD,
+    username: process.env.TYPEORM_USERNAME,
+    database: process.env.TYPEORM_DATABASE,
     poolSize: 1,
     loggerLevel: 'info',
     logging:true,
     useUnifiedTopology: true,
     pkFactory: customPkFactory(),
-    entities: ['./src/infra/orms/**/*.entity.{ts,js}'],
-    migrations: ['./src/infra/orms/migrations/**/*.{ts,js}'],
+    entities: ['dist/infra/orms/**/*.entity.{ts,js}'],
+    migrations: ['dist/infra/orms/migrations/**/*.{ts,js}'],
     cli: {
-        entitiesDir: './src/infra/orms',
-        migrationsDir: './src/infra/orms/migrations'
+        entitiesDir: 'dist/infra/orms',
+        migrationsDir: 'dist/infra/orms/migrations'
     },
     synchronize: true,
     ssl: true,
     authSource: 'admin',
-    // url:'mongodb+srv://admin:admin@cluster0.2nyar.mongodb.net/test?retryWrites=true&w=majority'
 };
