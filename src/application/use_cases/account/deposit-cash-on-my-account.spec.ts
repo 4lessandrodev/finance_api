@@ -1,5 +1,5 @@
 import { IAccount } from '../../../domain/interfaces';
-import { DepositCashOnMyAccountUseCase } from './deposit-cash-on-my-account';
+import { DepositCashOnMyAccountUseCase } from './deposit-cash-on-my-account.use-case';
 import { fakeAccountRepo, fakeAccountWithDeposit} from '../tests/fakeRepo';
 
 describe('deposit cash on my account', () => {
