@@ -41,11 +41,11 @@ export class Account extends AggregateRoot implements IAccount{
  }
 
  applyDebitValue(debit: IAccountWithDebit): Account | Error{
-  const validDebit = debit.value < 0 ? 0 : debit.value;
-  if (this.balance <= 0 || (this.balance - validDebit) < 0) {
+  const validDebitValue = debit.value < 0 ? 0 : debit.value;
+  if (this.balance <= 0 || (this.balance - validDebitValue) < 0) {
    throw new Error('Insufficient funds for this operation');
   }
-  const updatedBalance = this.balance - validDebit;
+  const updatedBalance = this.balance - validDebitValue;
   return new Account({ ...this, balance: updatedBalance});
  }
 

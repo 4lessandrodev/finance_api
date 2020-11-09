@@ -18,8 +18,6 @@ export class AccountService {
       return createAccount;
     }
     
-    // async findAll(): Promise<IAccount[]> {
-    //   return this.accountModel.find().exec();
-    // }
+   // Add repository CRUD method
   }
   
