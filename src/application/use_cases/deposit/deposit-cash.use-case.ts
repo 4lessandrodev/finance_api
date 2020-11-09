@@ -1,13 +1,12 @@
-import { IAccount } from '../../../domain/interfaces/entities/IAccount';
-import { DepositCashAccountDto } from 'src/dto/account/deposit-cash-account.dto';
+import { DepositCashAccountDto } from '../../../dto';
 import { Deposit } from '../../../domain/entities/Deposit';
-import { IAccountRepository } from '../../../domain/interfaces/repositories/IAccountRepository';
 import { IUseCase } from '../interfaces/IUseCase';
+import { IDepositCash } from '../../../domain/interfaces/entities/IDepositCash';
+import { IDepositCashRepository } from '../../../domain/interfaces/repositories/IDepositCashRepository';
 
-export class DepositCashUseCase implements IUseCase<DepositCashAccountDto, IAccount>{
- execute = async (depositDto:DepositCashAccountDto, repository: IAccountRepository): Promise<IAccount> => {  
+export class DepositCashUseCase implements IUseCase<DepositCashAccountDto, IDepositCash>{
+ execute = async (depositDto:IDepositCash, repository: IDepositCashRepository): Promise<IDepositCash> => {  
   const deposit = new Deposit(depositDto);
-  return await repository.depositCashOnAccount(deposit, depositDto.depositValue);  
-  
+  return await repository.depositCashOnAccount(deposit);  
  }
 }
