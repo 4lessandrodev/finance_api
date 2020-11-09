@@ -5,14 +5,20 @@ export const customPkFactory = () => uuid();
 
 export const typeormConfig:TypeOrmModuleOptions[] = [{
     type: 'mongodb',
-    host: 'cluster0.2nyar.mongodb.net',
+    host: 'localhost',
     port: 27017,
     database: 'test',
-    poolSize: 3,
+    poolSize: 1,
     loggerLevel: 'info',
-    password: 'admin',
-    username: 'admin',
+    password: 'root',
+    username: 'root',
     pkFactory: customPkFactory(),
-    entities: [`${__dirname}/../**/*.entity.ts`],
-    synchronize:true
+    entities: ['./src/infra/orms/**/*.entity.{ts,js}'],
+    migrations: ['./src/infra/orms/migrations/**/*.{ts,js}'],
+    synchronize: true,
+    cli: {
+        entitiesDir: './src/infra/orms',
+        migrationsDir: './src/infra/orms/migrations'
+    },
+    useUnifiedTopology: true
 }];
