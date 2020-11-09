@@ -6,17 +6,17 @@ export class UpdateAccountDto{
  id: string;
  
  @IsNotEmpty()
- @IsNumber()
+ @IsNumber({maxDecimalPlaces:0})
  agency: number;
  
  @IsNotEmpty()
- @IsNumber()
+ @IsNumber({maxDecimalPlaces:0})
  account: number;
  
  @IsNotEmpty()
  name: string;
 
  @IsNotEmpty()
- @IsNumber()
+ @IsNumber({maxDecimalPlaces:2})
  balance: number;
 }

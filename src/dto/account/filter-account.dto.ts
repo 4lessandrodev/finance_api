@@ -1,6 +1,6 @@
 import { IsOptional, IsString } from 'class-validator';
 
-export class filterAccountDto{
+export class FilterAccountDto{
  @IsOptional()
  @IsString()
  search:string

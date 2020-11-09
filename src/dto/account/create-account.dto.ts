@@ -4,17 +4,18 @@ export class CreateAccountDto{
  id: string | null;
 
  @IsNotEmpty()
- @IsNumber()
+ @IsNumber({maxDecimalPlaces:0})
  agency: number;
  
  @IsNotEmpty()
- @IsNumber()
+ @IsNumber({maxDecimalPlaces:0})
  account: number;
 
  @IsNotEmpty()
  name: string;
 
  @IsNotEmpty()
- @IsNumber()
- balance:number
+ @IsNumber({ maxDecimalPlaces: 2 })
+ balance: number;
+
 }
