@@ -4,6 +4,7 @@ import {validate} from 'uuid';
 import { IAccount } from '../interfaces/entities/IAccount';
 import { IAccountWithDebit } from '../interfaces/entities/IAccountWithDebit';
 import { IAccountWithDeposit } from '../interfaces/entities/IAccountWithDeposit';
+import { Result } from '../aggregate-root/Result';
 
 
 export class Account extends AggregateRoot implements IAccount{
@@ -12,41 +13,45 @@ export class Account extends AggregateRoot implements IAccount{
  readonly account: number;
  readonly name: string;
  readonly balance: number;
- constructor(account: CreateAccountDto) {
+ private constructor(account: CreateAccountDto) {
   super();
-  this.id = this.validateId(account?.id);
-  this.agency = account?.agency;
-  this.account = account?.account;
-  this.name = account?.name;
-  this.balance = account?.balance;
-  this.validateAccount();
+  this.id = account.id;
+  this.agency = account.agency;
+  this.account = account.account;
+  this.name = account.name;
+  this.balance = account.balance;
  }
 
- private isValidAccount(): boolean {
-  return (this.account > 0)&&(this.agency > 0)&&(this.balance >= 0)&&(this.name.length >= 3)&&(validate(this.id));
- }
 
- private validateAccount(): Error | void {
-  const isValidAccount = this.isValidAccount();
-  if (!isValidAccount) { throw new Error('Invalid account params');}
- }
-
- applyDepositValue(deposit: IAccountWithDeposit): Account{
-  const validDepositValue = deposit.value < 0 ? 0 : deposit.value;
-  if (validDepositValue <= 0) {
-   throw new Error('Not valid value');
+ applyDepositValue(deposit: IAccountWithDeposit): Result<Account>{
+  if (deposit.value <= 0) {
+   return Result.fail<Account>('Invalid value');
   }
-  const updatedBalance = this.balance + validDepositValue;
-  return new Account({...this, balance: updatedBalance});
+  const updatedBalance = this.balance + deposit.value;
+  return Result.ok<Account>(new Account({ ...this, balance: updatedBalance }));
  }
 
- applyDebitValue(debit: IAccountWithDebit): Account | Error{
+
+ applyDebitValue(debit: IAccountWithDebit): Result<Account>{
   const validDebitValue = debit.value < 0 ? 0 : debit.value;
   if (this.balance <= 0 || (this.balance - validDebitValue) < 0) {
-   throw new Error('Insufficient funds for this operation');
+   return Result.fail<Account>('Insufficient funds for this operation');
   }
   const updatedBalance = this.balance - validDebitValue;
-  return new Account({ ...this, balance: updatedBalance});
+  return Result.ok<Account>(new Account({ ...this, balance: updatedBalance}));
+ }
+
+
+ public static create(account: CreateAccountDto):Result<Account> {
+  account.id = this.validateId(account?.id);
+  
+  const isValid = (account.account > 0) && (account.agency > 0) &&
+   (account.balance >= 0) && (account.name.length >= 3) && (validate(account.id));
+  
+  if (!isValid) {
+   return Result.fail<Account>('Invalid account params');
+  }
+  return Result.ok<Account>(new Account(account));
  }
 
 }

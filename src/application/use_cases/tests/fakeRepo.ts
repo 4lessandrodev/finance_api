@@ -10,6 +10,7 @@ import { v4 as uuid } from 'uuid';
 import { MakeTransferenceDto } from '../../../dto/account/make-transference.dto';
 import { IDepositCash } from '../../../domain/interfaces/entities/IDepositCash';
 import { DepositCashAccountDto } from '../../../dto/deposit/deposit-cash-account.dto';
+import { Result } from '../../../domain/aggregate-root/Result';
 
 export const fakeAccountWithDeposit = ():IAccountWithDeposit => {
  return {
@@ -81,16 +82,38 @@ export const fakeDepositWithId = ():IDepositCash => {
 export const fakeAccountRepo = () => {
  const accounts:IAccount[] = [fakeAccountWithId(), fakeAccountWithId(), fakeAccountWithId(),fakeAccountWithId()];
  return {
-  createAccount: async (account: CreateAccountDto): Promise<IAccount> => { return account; },
-  updateAccount: async (account: UpdateAccountDto): Promise<IAccount> => { return account; },
-  deleteAccount: async (id: DeleteAccountDto): Promise<void> => { console.log(id); },
-  findOneAccount: async (fn: FindAccountDto): Promise<IAccount> => { return accounts.find((acc) => acc.id === fn.id); },
-  findManyAccount:async(search:FilterAccountDto): Promise<IAccount[]>=>{return accounts.filter((acc)=> acc.id === search.search);},
-  makeTransference: async (transference: MakeTransferenceDto): Promise<IAccount> => {
-   console.log(transference);
-   return fakeAccount();
+    createAccount: async (account: CreateAccountDto): Promise<Result<IAccount>> => {
+       return Result.ok<IAccount>(account);
+    },
+    updateAccount: async (account: UpdateAccountDto): Promise<Result<IAccount>> => {
+       return Result.ok<IAccount>(account);
+    },
+    deleteAccount: async (id: DeleteAccountDto): Promise<Result<void>> => {
+       console.log(id);
+       return Result.ok<void>();
+    },
+    findOneAccount: async (fn: FindAccountDto): Promise<Result<IAccount>> => {
+       const accountOrError = accounts.find((acc) => acc.id === fn.id);
+       if (!accountOrError) {
+          return Result.fail<IAccount>('Not found');
+       }
+       return Result.ok<IAccount>(accountOrError);
+    },
+    findManyAccount: async (search: FilterAccountDto): Promise<Result<IAccount[]>> => {
+       const accountOrError = accounts.filter((acc) => acc.id === search.search);
+       if (accountOrError.length === 0) {
+         return Result.fail<IAccount[]>('Not found');
+      }
+       return Result.ok<IAccount[]>(accountOrError);
+    },
+  makeTransference: async (transference: MakeTransferenceDto): Promise<Result<IAccount>> => {
+     console.log(transference);
+   return Result.ok<IAccount>(fakeAccount());
   },
-  depositCashOnMyAccount:async(account: DepositCashOnMyAccountDto): Promise<IAccount>=>{return account;}
+    depositCashOnMyAccount: async (account: DepositCashOnMyAccountDto): Promise<Result<IAccount>> => {
+       account.balance += account.value;
+       return Result.ok<IAccount>(account);
+    }
  };
 };
 
@@ -98,10 +121,10 @@ export const fakeAccountRepo = () => {
 export const fakeDepositRepo = () => {
  const deposits:IDepositCash[] = [fakeDepositWithId(), fakeDepositWithId(), fakeDepositWithId(), fakeDepositWithId()];
  return {
-  async depositCashOnAccount(deposit: DepositCashAccountDto): Promise<IDepositCash> {
+  async depositCashOnAccount(deposit: DepositCashAccountDto): Promise<Result<IDepositCash>> {
    const depositResult = { value:deposit.value, toAccount: deposit.toAccount, toAgency: deposit.toAgency };
-   await deposits.push(depositResult);
-   return deposit;
+   deposits.push(depositResult);
+   return Result.ok<IDepositCash>(depositResult);
   }
 };
 };
