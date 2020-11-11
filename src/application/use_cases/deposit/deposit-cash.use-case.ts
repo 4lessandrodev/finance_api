@@ -7,7 +7,10 @@ import { Result } from '../../../domain/aggregate-root/Result';
 
 export class DepositCashUseCase implements IUseCase<DepositCashAccountDto, IDepositCash>{
  execute = async (depositDto:IDepositCash, repository: IDepositCashRepository): Promise<Result<IDepositCash>> => {  
-  const deposit = new Deposit(depositDto);
-  return await repository.depositCashOnAccount(deposit);  
+  const depositOrError = Deposit.create(depositDto);
+  if (depositOrError.isFailure) {
+   return Result.fail<Deposit>(depositOrError.error.toString());
+  }
+  return await repository.depositCashOnAccount(depositOrError.getValue());  
  }
 }

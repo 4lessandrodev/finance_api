@@ -6,11 +6,11 @@ import { Deposit } from './../../../domain/entities/Deposit';
 
 describe('create account', () => {
 
-   it('should create a instance of account to make a deposit', () => {
+   it('should create a instance of account to make a deposit', async () => {
       const repository = fakeDepositRepo();
-      const depositDto = new Deposit(fakeDeposit());
-      const result = async ()=> await new DepositCashUseCase().execute(depositDto, repository);
-      expect(result).not.toThrow();
+      const depositDto = Deposit.create(fakeDeposit());
+      const result = await new DepositCashUseCase().execute(depositDto.getValue(), repository);
+      expect(result.getValue().value).toBe(depositDto.getValue().value);
    });
 
    // Ensure call credit domain event on make a deposit 
