@@ -11,7 +11,8 @@ export class IdValueObject implements IIdValueObject{
   this.value = value;
  }
  public static create(value: string): Result<IdValueObject> {
-  if (validate(value)) {
+  const isValid = validate(value);
+  if (!isValid) {
    return Result.fail<IdValueObject>('Invalid uuid string pattern');
   }
  return Result.ok<IdValueObject>(new IdValueObject(value));
